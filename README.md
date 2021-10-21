@@ -56,11 +56,11 @@ Uploading tarball of [.] to [gs://<gcp_project_id>_clouddeploy/source/1632576641
 Waiting for operation [operation-1632576644579-5ccd1def8005e-e9fc5844-a6860ec5]...done.               
 Created Cloud Deploy release test-release-001.
 API [cloudresourcemanager.googleapis.com] not enabled on project 
-[403982600382]. Would you like to enable and retry (this will take a 
+[xxx]. Would you like to enable and retry (this will take a 
 few minutes)? (y/N)?  y
 
-Enabling service [cloudresourcemanager.googleapis.com] on project [403982600382]...
-Operation "operations/acf.p2-403982600382-b1ce3c52-4e1a-46c8-90b9-7f6e4043f9ff" finished successfully.
+Enabling service [cloudresourcemanager.googleapis.com] on project [xxx]...
+Operation "operations/acf.p2-xxx-b1ce3c52-4e1a-46c8-90b9-7f6e4043f9ff" finished successfully.
 Creating rollout projects/<gcp_project_id>/locations/us-central1/deliveryPipelines/my-demo-app-1/
 releases/test-release-001/rollouts/test-release-001-to-qsdev-0001 in target qsdev...done.    
 ```
