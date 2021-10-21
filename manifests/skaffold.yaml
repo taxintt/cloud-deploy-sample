@@ -1,0 +1,29 @@
+# apiVersion: skaffold/v2beta12
+# kind: Config
+# build:
+#   artifacts:
+#   - image: skaffold-example
+# deploy:
+#   kubectl:
+#     manifests:
+#       - k8s-*
+
+apiVersion: skaffold/v2beta10
+kind: Config
+profiles:
+- name: staging
+  build:
+    tagPolicy:
+      dateTime: {}
+  deploy:
+    kustomize:
+      paths:
+      - overlays/staging
+- name: production
+  build:
+    tagPolicy:
+      dateTime: {}
+  deploy:
+    kustomize:
+      paths:
+      - overlays/production
