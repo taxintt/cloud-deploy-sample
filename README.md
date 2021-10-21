@@ -1,7 +1,8 @@
 This is sample repository for running Google Cloud Deploy in GKE cluster.
 
 ## prerequisities
-
+- Terraform (v0.15.5 or higher)
+- Cloud SDK (358.0.0 or higher)
 ## process
 
 ### 0. create k8s cluster
