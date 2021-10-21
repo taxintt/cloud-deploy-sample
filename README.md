@@ -124,3 +124,6 @@ Events:
   ----    ------             ----  ----                   -------
   Normal  ScalingReplicaSet  103s  deployment-controller  Scaled up replica set production-test-app-5d66fdddb4 to 1
 ```
+
+## reference
+- https://cloud.google.com/deploy/docs/quickstart-basic?hl=ja
