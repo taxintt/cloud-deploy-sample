@@ -17,7 +17,7 @@ metadata:
  name: run-qsdev
 description: Cloud Run development service
 run:
- location: projects/gcp-terraform-277014/locations/us-central1
+ location: projects/sample-cicd-271901/locations/us-central1
 ---
 
 apiVersion: deploy.cloud.google.com/v1
@@ -26,4 +26,4 @@ metadata:
  name: run-qsprod
 description: Cloud Run production service
 run:
- location: projects/gcp-terraform-277014/locations/us-central1
+ location: projects/sample-cicd-271901/locations/us-central1
