@@ -165,10 +165,10 @@ resource "google_project_iam_member" "clouddeploy_backend_is_run_developer" {
   member  = "serviceAccount:${google_service_account.clouddeploy_backend.email}"
 }
 
-resource "google_service_account_iam_member" "clouddeploy_backend_is_cloudrun_backend_user" {
-  service_account_id = google_service_account.run_backend.name
-  role               = "roles/iam.serviceAccountUser"
-  member             = "serviceAccount:${google_service_account.clouddeploy_backend.email}"
+resource "google_project_iam_member" "clouddeploy_backend_is_gcs_bucket_creator" {
+  project = var.project_id
+  role    = "roles/storage.admin"
+  member  = "serviceAccount:${google_service_account.clouddeploy_backend.email}"
 }
 
 #
@@ -184,4 +184,10 @@ resource "google_project_iam_member" "run_backend_is_service_account_user" {
   project = var.project_id
   role    = "roles/iam.serviceAccountUser"
   member  = "serviceAccount:${google_service_account.run_backend.email}"
+}
+
+resource "google_service_account_iam_member" "clouddeploy_backend_is_cloudrun_backend_user" {
+  service_account_id = google_service_account.run_backend.name
+  role               = "roles/iam.serviceAccountUser"
+  member             = "serviceAccount:${google_service_account.clouddeploy_backend.email}"
 }
