@@ -166,11 +166,11 @@ resource "google_project_iam_member" "clouddeploy_backend_is_run_developer" {
 }
 
 # Role for creating GCS bucket
-resource "google_project_iam_member" "clouddeploy_backend_is_gcs_bucket_creator" {
-  project = var.project_id
-  role    = "roles/storage.admin"
-  member  = "serviceAccount:${google_service_account.clouddeploy_backend.email}"
-}
+# resource "google_project_iam_member" "clouddeploy_backend_is_gcs_bucket_creator" {
+#   project = var.project_id
+#   role    = "roles/storage.admin"
+#   member  = "serviceAccount:${google_service_account.clouddeploy_backend.email}"
+# }
 
 #
 # IAM service account (cloud run)
