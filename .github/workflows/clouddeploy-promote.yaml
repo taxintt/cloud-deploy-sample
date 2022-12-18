@@ -1,16 +1,17 @@
-name: clouddeploy-create-release
+name: clouddeploy-promote
 on:
-  push:
+  pull_request:
     branches:
-      - '**'
-      - '!main'
+      - main
+    types: [closed]
 
 permissions:
   contents: 'read'
   id-token: 'write'
 
 jobs:
-  clouddeploy-create-release:
+  clouddeploy-promote:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -32,8 +33,7 @@ jobs:
       - name: Deploy to Cloud Run
         run: |-
           PR_NUMBER=$(echo $GITHUB_REF | sed -e 's/[^0-9]//g')
-          gcloud beta deploy releases create release-$PR_NUMBER \
+          gcloud beta deploy releases promote --release=release-$PR_NUMBER \
             --project=${{ secrets.GCP_PROJECT_ID }} \
             --delivery-pipeline=test-app-backend \
-            --region=asia-northeast1 \
-            --images=my-app-image=gcr.io/cloudrun/hello
+            --region=asia-northeast1
