@@ -153,9 +153,9 @@ resource "google_project_iam_member" "clouddeploy_backend_is_clouddeploy_job_run
   member  = "serviceAccount:${google_service_account.clouddeploy_backend.email}"
 }
 
-resource "google_project_iam_member" "clouddeploy_backend_is_clouddeploy_developer" {
+resource "google_project_iam_member" "clouddeploy_backend_is_clouddeploy_releaser" {
   project = var.project_id
-  role    = "roles/clouddeploy.developer"
+  role    = "roles/clouddeploy.releaser"
   member  = "serviceAccount:${google_service_account.clouddeploy_backend.email}"
 }
 
