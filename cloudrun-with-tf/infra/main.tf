@@ -92,6 +92,31 @@ resource "google_clouddeploy_target" "prod" {
 }
 
 #
+# cloud run
+#
+resource "google_cloud_run_service" "sample" {
+  provider = google-beta
+  project  = var.project_id
+
+  name     = "sample"
+  location = var.region
+
+  template {
+    spec {
+      containers {
+        image = "gcr.io/cloudrun/hello:latest"
+      }
+    }
+    metadata {
+      # https://cloud.google.com/run/docs/configuring/connecting-vpc?hl=en#egress
+      annotations = {
+        # "autoscaling.knative.dev/maxScale"        = "100"
+      }
+    }
+  }
+}
+
+#
 # IAM service account (cloud deploy)
 # 
 resource "google_service_account" "clouddeploy_backend" {
@@ -119,7 +144,7 @@ resource "google_secret_manager_secret" "sa_key" {
 
 resource "google_secret_manager_secret_version" "sa_key" {
   secret = google_secret_manager_secret.sa_key.id
-  secret_data = base64encode(google_service_account_key.clouddeploy_backend.private_key)
+  secret_data = base64decode(google_service_account_key.clouddeploy_backend.private_key)
 }
 
 resource "google_project_iam_member" "clouddeploy_backend_is_clouddeploy_job_runner" {
