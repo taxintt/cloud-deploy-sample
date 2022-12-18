@@ -36,4 +36,5 @@ jobs:
             --project=${{ secrets.GCP_PROJECT_ID }} \
             --delivery-pipeline=test-app-backend \
             --region=asia-northeast1 \
-            --images=my-app-image=gcr.io/cloudrun/hello
+            --images=my-app-image=gcr.io/cloudrun/hello \
+            --quiet
