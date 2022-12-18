@@ -1,9 +1,8 @@
 name: clouddeploy-promote
 on:
-  pull_request:
-    branches:
-      - main
-    types: [closed]
+  push:
+    tags:
+    - release-*
 
 permissions:
   contents: 'read'
