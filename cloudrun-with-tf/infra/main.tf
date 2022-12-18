@@ -62,6 +62,7 @@ resource "google_clouddeploy_target" "dev" {
         service_account = google_service_account.clouddeploy_backend.email
     }
 
+    # TODO: specify the project for dev environment
     run {
         location = "projects/${var.project_id}/locations/${var.region}"
     }
@@ -88,6 +89,7 @@ resource "google_clouddeploy_target" "prod" {
         service_account = google_service_account.clouddeploy_backend.email
     }
 
+    # TODO: specify the project for dev environment
     run {
         location = "projects/${var.project_id}/locations/${var.region}"
     }
