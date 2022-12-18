@@ -30,7 +30,7 @@ jobs:
       - name: "Set up Cloud SDK"
         uses: "google-github-actions/setup-gcloud@v1"
       
-      - name: Deploy to Cloud Run
+      - name: Promote release
         run: |-
           PR_NUMBER=$(echo $GITHUB_REF | sed -e 's/[^0-9]//g')
           gcloud deploy releases promote --release=release-$PR_NUMBER \
