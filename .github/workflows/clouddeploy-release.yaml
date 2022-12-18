@@ -1,0 +1,40 @@
+name: clouddeploy-create-release
+on:
+  push:
+    branches:
+      - '**'
+      - '!main'
+
+permissions:
+  contents: 'read'
+  id-token: 'write'
+
+jobs:
+  clouddeploy-create-release:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./cloudrun-with-tf
+    steps:
+      # https://github.com/google-github-actions/setup-gcloud/blob/main/example-workflows/cloud-run/cloud-run.yml
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
+
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v1"
+      
+      - name: Create release that is connected PR number
+        run: |-
+          PR_NUMBER=$(echo $GITHUB_REF | sed -e 's/[^0-9]//g')
+          gcloud deploy releases create release-$PR_NUMBER \
+            --project=${{ secrets.GCP_PROJECT_ID }} \
+            --delivery-pipeline=test-app-backend \
+            --region=us-central1 \
+            --images=my-app-image=gcr.io/cloudrun/hello \
+            --quiet
