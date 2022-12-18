@@ -33,7 +33,7 @@ jobs:
       - name: Deploy to Cloud Run
         run: |-
           PR_NUMBER=$(echo $GITHUB_REF | sed -e 's/[^0-9]//g')
-          gcloud beta deploy releases promote --release=release-$PR_NUMBER \
+          gcloud deploy releases promote --release=release-$PR_NUMBER \
             --project=${{ secrets.GCP_PROJECT_ID }} \
             --delivery-pipeline=test-app-backend \
             --region=asia-northeast1 \
