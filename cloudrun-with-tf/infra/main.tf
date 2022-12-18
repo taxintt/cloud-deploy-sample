@@ -109,12 +109,6 @@ resource "google_cloud_run_service" "sample" {
         image = "gcr.io/cloudrun/hello:latest"
       }
     }
-    metadata {
-      # https://cloud.google.com/run/docs/configuring/connecting-vpc?hl=en#egress
-      annotations = {
-        # "autoscaling.knative.dev/maxScale"        = "100"
-      }
-    }
   }
 }
 
@@ -196,8 +190,8 @@ resource "google_project_iam_member" "run_backend_is_service_account_user" {
   member  = "serviceAccount:${google_service_account.run_backend.email}"
 }
 
-resource "google_service_account_iam_member" "clouddeploy_backend_is_cloudrun_backend_user" {
-  service_account_id = google_service_account.run_backend.name
-  role               = "roles/iam.serviceAccountUser"
-  member             = "serviceAccount:${google_service_account.clouddeploy_backend.email}"
-}
+# resource "google_service_account_iam_member" "clouddeploy_backend_is_cloudrun_backend_user" {
+#   service_account_id = google_service_account.run_backend.name
+#   role               = "roles/iam.serviceAccountUser"
+#   member             = "serviceAccount:${google_service_account.clouddeploy_backend.email}"
+# }
