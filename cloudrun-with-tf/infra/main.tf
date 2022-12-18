@@ -167,11 +167,18 @@ resource "google_project_iam_member" "clouddeploy_backend_is_run_developer" {
   member  = "serviceAccount:${google_service_account.clouddeploy_backend.email}"
 }
 
+# TODO: we have to grant role for bucket that is created randomly like 2238c8c34bc44369acb308bc661fd899_clouddeploy
 # Role for creating and accessing GCS bucket
 resource "google_project_iam_member" "clouddeploy_backend_is_gcs_bucket_creator" {
   project = var.project_id
   role    = "roles/storage.admin"
   member  = "serviceAccount:${google_service_account.clouddeploy_backend.email}"
+}
+
+resource "google_service_account_iam_member" "clouddeploy_backend_is_service_account_user" {
+  service_account_id = google_service_account.clouddeploy_backend.name
+  role               = "roles/iam.serviceAccountUser"
+  member             = "serviceAccount:${google_service_account.clouddeploy_backend.email}"
 }
 
 #
