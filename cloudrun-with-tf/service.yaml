@@ -1,7 +1,8 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: hello-app
+  # TODO: set Cloud run service name
+  name: sample 
 spec:
   template:
     spec:

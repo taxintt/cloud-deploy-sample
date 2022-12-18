@@ -62,6 +62,7 @@ resource "google_clouddeploy_target" "dev" {
         service_account = google_service_account.clouddeploy_backend.email
     }
 
+    # TODO: specify the project for dev environment
     run {
         location = "projects/${var.project_id}/locations/${var.region}"
     }
@@ -88,6 +89,7 @@ resource "google_clouddeploy_target" "prod" {
         service_account = google_service_account.clouddeploy_backend.email
     }
 
+    # TODO: specify the project for dev environment
     run {
         location = "projects/${var.project_id}/locations/${var.region}"
     }
@@ -161,7 +163,7 @@ resource "google_project_iam_member" "clouddeploy_backend_is_run_developer" {
   member  = "serviceAccount:${google_service_account.clouddeploy_backend.email}"
 }
 
-# TODO: we have to grant role for bucket that is created randomly like 2238c8c34bc44369acb308bc661fd899_clouddeploy
+# TODO: we have to grant role for source bucket that is created randomly like 2238c8c34bc44369acb308bc661fd899_clouddeploy
 # Role for creating and accessing GCS bucket
 resource "google_project_iam_member" "clouddeploy_backend_is_gcs_bucket_creator" {
   project = var.project_id
@@ -189,9 +191,3 @@ resource "google_project_iam_member" "run_backend_is_service_account_user" {
   role    = "roles/iam.serviceAccountUser"
   member  = "serviceAccount:${google_service_account.run_backend.email}"
 }
-
-# resource "google_service_account_iam_member" "clouddeploy_backend_is_cloudrun_backend_user" {
-#   service_account_id = google_service_account.run_backend.name
-#   role               = "roles/iam.serviceAccountUser"
-#   member             = "serviceAccount:${google_service_account.clouddeploy_backend.email}"
-# }
