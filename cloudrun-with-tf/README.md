@@ -1,14 +1,20 @@
-This is sample repository for running Google Cloud Deploy in Cloud run with Terraform. 
-
 ## process
 
 ### 1. create deploy pipeline (Terraform)
 
 ```tf
+# set project_id = "<project_id>"
+touch dev.tfvars
 
+make apply
 ```
 
 ### 2. create release (change image tag or digest)
+Set these secrets as github actions secrets
+
+- `GCP_CREDENTIALS`
+  - `cat your-service-key.json | base64 | pbcopy`
+- `GCP_PROJECT_ID`
 
 ```
 gcloud beta deploy releases create test-release-001 \
@@ -57,3 +63,4 @@ Waiting for rollout creation operation to complete...done.
 
 ## reference
 - https://cloud.google.com/deploy/docs/deploy-app-run
+- https://cloud.google.com/deploy/docs/config-files
