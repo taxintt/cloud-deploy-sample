@@ -28,12 +28,14 @@ resource "google_clouddeploy_delivery_pipeline" "primary" {
     serial_pipeline {
         stages {
             profiles  = []
-            target_id = google_clouddeploy_target.dev.target_id
+            target_id = "run-qsdev"
         }
 
         stages {
             profiles  = []
-            target_id = google_clouddeploy_target.prod.target_id
+            # WARN: use target name 
+            # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/clouddeploy_delivery_pipeline#target_id
+            target_id = "run-qsprod"
         }
     }
 }
