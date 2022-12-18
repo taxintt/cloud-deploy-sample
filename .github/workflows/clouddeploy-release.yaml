@@ -31,8 +31,8 @@ jobs:
       
       - name: Create release that is connected PR number
         run: |-
-          PR_NUMBER=$(echo $GITHUB_REF | sed -e 's/[^0-9]//g')
-          gcloud deploy releases create release-$PR_NUMBER \
+          # PR_NUMBER=$(echo $GITHUB_REF | sed -e 's/[^0-9]//g')
+          gcloud deploy releases create release-0001 \
             --project=${{ secrets.GCP_PROJECT_ID }} \
             --delivery-pipeline=test-app-backend \
             --region=us-central1 \
